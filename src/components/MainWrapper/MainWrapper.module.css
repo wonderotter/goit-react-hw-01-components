@@ -1,0 +1,17 @@
+.main-wrapper {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+  background-color: #e7ecf2;
+}
+
+.task {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  color: rgb(182, 39, 182);
+  font-size: 14px;
+  font-style: italic;
+}
