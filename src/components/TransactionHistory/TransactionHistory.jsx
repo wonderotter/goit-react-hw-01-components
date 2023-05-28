@@ -1,36 +1,35 @@
 import PropTypes from "prop-types";
-import css from './TransactionHistory.module.css';
+import css from "./TransactionHistory.module.css";
 
-export const TransactionHistory =
-  ({ items }) => (
-    <table className={css["transaction-history"]}>
+export const TransactionHistory = ({ items }) => {
+  return (
+    <table className={css.transactionHistory}>
       <thead>
-        <tr className={css.header}>
-          <th className={css["header-item"]} > Type </th>
-          <th className={css["header-item"]} > Amount </th>
-          <th className={css["header-item"]} > Currency </th>
+        <tr>
+          <th className={css.tableHead}>Type</th>
+          <th className={css.tableHead}>Amount</th>
+          <th className={css.tableHead}>Currency</th>
         </tr>
       </thead>
 
       <tbody>
-        {items.map(({ id, type, amount, currency }) => (
-          <tr key={id} className={css["body-list"]}>
-            <td className={css["body-item"]} > {type} </td>
-            <td className={css["body-item"]} > {amount} </td>
-            <td className={css["body-item"]} > {currency} </td>
+        {items.map(item => (
+          <tr key={item.id}>
+            <td className={css.tableRow}>{item.type}</td>
+            <td className={css.tableRow}>{item.amount}</td>
+            <td className={css.tableRow}>{item.currency}</td>
           </tr>
         ))}
       </tbody>
     </table>
   );
+}
 
 TransactionHistory.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      amount: PropTypes.string.isRequired,
-      currency: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired
-};
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    amount: PropTypes.string.isRequired,
+    currency: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(["invoice", "payment", "withdrawal", "deposit"]).isRequired,
+  })).isRequired
+}
